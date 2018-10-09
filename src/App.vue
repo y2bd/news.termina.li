@@ -9,7 +9,7 @@ body {
   background: black;
 
   color: #ddd;
-  font-family: Consolas;
+  font-family: Consolas, Menlo, monospace;
   font-weight: 200;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
