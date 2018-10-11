@@ -20,9 +20,6 @@
 .article-list-leave-to {
   opacity: 0;
 }
-.article-list-leave-active {
-  position: absolute;
-}
 </style>
 
 
