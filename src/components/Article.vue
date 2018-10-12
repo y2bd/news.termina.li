@@ -8,10 +8,12 @@
         </a>
       </h1>
       <div class="content">
-        <time>{{ article.time }}</time>
+        <time>
+          {{ date }}
+        </time>
         <a :href="article.url" 
           class="url">
-          google.com
+          {{ url }}
         </a>
         <a :href="`https://news.ycombinator.com/user?id=${article.by}`" 
           class="author">
@@ -31,6 +33,37 @@ export default Vue.extend({
   name: "Article",
   props: {
     article: t<Article>()
+  },
+  computed: {
+    date: function() {
+      const date: Date = new Date(this.article.time * 1000);
+
+      const year = String(date.getFullYear());
+      const month = String(date.getMonth() + 1);
+      const day = String(date.getDate());
+      const hour = String(date.getHours());
+      const minute = String(date.getMinutes());
+
+      if (Date.now() - date.getTime() > 1000 * 60 * 60 * 24) {
+        return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+      } else {
+        return `${hour.padStart(2, "0")}:${minute.padStart(2, "0")}`;
+      }
+    },
+    url: function() {
+      const urlObj: URL = new URL(this.article.url);
+
+      if (urlObj.hostname.length > 22 || urlObj.hostname.startsWith("www")) {
+        return urlObj.hostname
+          .split(".")
+          .reverse()
+          .slice(0, 2)
+          .reverse()
+          .join(".");
+      }
+
+      return urlObj.hostname;
+    }
   }
 });
 </script>
@@ -38,7 +71,7 @@ export default Vue.extend({
 <style scoped lang="scss">
 .article {
   list-style-type: none;
-  margin: 0 0 20px;
+  margin: 0 0 20px -41px;
 
   .points,
   .content {
