@@ -18,6 +18,8 @@ body {
   max-width: 600px;
   margin: 0 auto;
   padding-left: 32px;
+
+  -webkit-text-size-adjust: 100%;
 }
 
 a {
